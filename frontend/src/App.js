@@ -38,14 +38,10 @@ export  default class App extends React.Component {
         reader.readAsText(files[0]);
     }
 
-    handleSubmit = event => {
+    handleSubmit = (event)=> {
         event.preventDefault();
 
-        const user = {
-            name: this.state.name
-        };
-
-        Axios.post(`/api/v1/update`, { user })
+        Axios.get(`api/v1/retrieve`)
             .then(res => {
                 console.log(res);
                 console.log(res.data);
@@ -54,6 +50,16 @@ export  default class App extends React.Component {
             {
                 console.log(error.response.data);
             });
+
+        // Axios.post(`/api/v1/update`, { user })
+        //     .then(res => {
+        //         console.log(res);
+        //         console.log(res.data);
+        //     })
+        //     .catch(error=>
+        //     {
+        //         console.log(error.response.data);
+        //     });
     }
 
     arrayAsString=(ary) =>
@@ -81,14 +87,11 @@ export  default class App extends React.Component {
               <ReactFileReader handleFiles={this.handleFiles} fileTypes={'.*'}>
                   <button className='btn'>Upload</button>
               </ReactFileReader>
-              <input type={"Button"} name={"Update"} value={"Preview"} onChange={this.handleSubmit}/>
+              <input type={"Button"} name={"Update"}  value={"Test restful get"} onClick={this.handleSubmit} onChange={this.handleSubmit}/>
           </div>
 
           <div>
-
-
-                      {this.arrayAsString(this.state.file)}
-
+              {this.arrayAsString(this.state.file)}
 
           </div>
       </header>
